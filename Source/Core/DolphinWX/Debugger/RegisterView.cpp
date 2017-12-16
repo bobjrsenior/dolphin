@@ -315,28 +315,24 @@ wxString CRegTable::GetValue(int row, int col)
     case 6:
     {
       if (row < 4)
-        return wxString::Format("%016" PRIx64, static_cast<u64>(PowerPC::ppcState.spr[SPR_DBAT0U + row * 2]) << 32 |
-                                               PowerPC::ppcState.spr[SPR_DBAT0L + row * 2]);
+        return wxString::Format("%016" PRIx64, static_cast<u64>(PowerPC::ppcState.spr[SPR_DBAT0U + row * 2])
+                                << 32 | PowerPC::ppcState.spr[SPR_DBAT0L + row * 2]);
 
       if (row < 8)
         return wxString::Format("%016" PRIx64, static_cast<u64>(PowerPC::ppcState.spr[SPR_IBAT0U + (row - 4) * 2])
-                                                   << 32 |
-                                               PowerPC::ppcState.spr[SPR_IBAT0L + (row - 4) * 2]);
+                                << 32 | PowerPC::ppcState.spr[SPR_IBAT0L + (row - 4) * 2]);
 
       if (row < 12)
         return wxString::Format("%016" PRIx64, static_cast<u64>(PowerPC::ppcState.spr[SPR_DBAT4U + (row - 12) * 2])
-                                                   << 32 |
-                                               PowerPC::ppcState.spr[SPR_DBAT4L + (row - 12) * 2]);
+                                << 32 | PowerPC::ppcState.spr[SPR_DBAT4L + (row - 12) * 2]);
 
       if (row < 16)
         return wxString::Format("%016" PRIx64, static_cast<u64>(PowerPC::ppcState.spr[SPR_IBAT4U + (row - 16) * 2])
-                                                   << 32 |
-                                               PowerPC::ppcState.spr[SPR_IBAT4L + (row - 16) * 2]);
+                                << 32 | PowerPC::ppcState.spr[SPR_IBAT4L + (row - 16) * 2]);
 
       if (row == 16)
         return wxString::Format("%016" PRIx64, static_cast<u64>(PowerPC::ppcState.spr[SPR_TU])
-                                                       << 32 |
-                                                   PowerPC::ppcState.spr[SPR_TL]);
+                                 << 32 | PowerPC::ppcState.spr[SPR_TL]);
 
       break;
     }
