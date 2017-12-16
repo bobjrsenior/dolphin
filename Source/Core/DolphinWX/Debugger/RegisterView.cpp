@@ -49,17 +49,17 @@ wxString GetFormatString(CRegTable::FormatSpecifier specifier)
   switch (specifier)
   {
   case CRegTable::FormatSpecifier::Hex8:
-    return wxString("%08x");
+    return wxString("%08" PRIx32);
   case CRegTable::FormatSpecifier::Hex16:
-    return wxString("%016llx");
+    return wxString("%016" PRIx64);
   case CRegTable::FormatSpecifier::Float:
     return wxString("%g");
   case CRegTable::FormatSpecifier::Double:
     return wxString("%g");
   case CRegTable::FormatSpecifier::UInt:
-    return wxString("%u");
+    return wxString("%" PRIu32);
   case CRegTable::FormatSpecifier::Int:
-    return wxString("%i");
+    return wxString("%" PRIi32);
   default:
     return wxString("");
   }
@@ -349,10 +349,10 @@ wxString CRegTable::GetValue(int row, int col)
     case 8:
     {
       if (row < 16)
-        return wxString::Format("%08x", PowerPC::ppcState.sr[row]);
+        return wxString::Format("%08" PRIx32, PowerPC::ppcState.sr[row]);
 
       if (row < 24)
-        return wxString::Format("%08x", PowerPC::ppcState.spr[SPR_GQR0 + (row - 16)]);
+        return wxString::Format("%08" PRIx32, PowerPC::ppcState.spr[SPR_GQR0 + (row - 16)]);
 
       break;
     }
@@ -369,7 +369,7 @@ wxString CRegTable::GetValue(int row, int col)
       case 0:
         return StrToWxStr(special_reg_names[row - 32]);
       case 1:
-        return wxString::Format("%08x", GetSpecialRegValue(row - 32));
+        return wxString::Format("%08" PRIx32, GetSpecialRegValue(row - 32));
       default:
         return wxEmptyString;
       }
